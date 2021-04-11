@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const app = express();
+
+const path = __dirname + '/app/views/';
+app.use(express.static(path));
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -26,7 +28,8 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  // res.json({ message: "Welcome to bezkoder application." });
+  res.sendFile(path+"index.html");
 });
 
 require("./app/routes/turorial.routes")(app);
