@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 /app/views/
+/app/views-ng/

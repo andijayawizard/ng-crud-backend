@@ -1,9 +1,10 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 
-const path = __dirname + '/app/views/';
+// serve angular app with express
+const path = __dirname + '/app/views-ng/';
 app.use(express.static(path));
 
 var corsOptions = {
@@ -13,26 +14,32 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 
 const db = require("./app/models");
 
+// for production
 db.sequelize.sync();
-// // drop the table if it already exists
+
+// drop the table if it already exists / for development
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
 
 // simple route
 app.get("/", (req, res) => {
-  // res.json({ message: "Welcome to bezkoder application." });
+  // res.json({ message: "Welcome to andijaya app" });
   res.sendFile(path+"index.html");
 });
 
-require("./app/routes/turorial.routes")(app);
+require("./app/routes/tutorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
