@@ -26,12 +26,12 @@ app.use(express.urlencoded({
 const db = require("./app/models");
 
 // for production
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // drop the table if it already exists / for development
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 // simple route
 app.get("/", (req, res) => {
