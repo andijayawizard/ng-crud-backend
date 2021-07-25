@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
   res.sendFile(path+"index.html");
 });
 
+require("./app/routes/siswa.routes")(app);
 require("./app/routes/tutorial.routes")(app);
 
 // set port, listen for requests
