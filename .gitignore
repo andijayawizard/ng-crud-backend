@@ -3,3 +3,5 @@ package-lock.json
 /app/views-ng/
 /app/views-react/
 /app/views-vue/
+.env
+
